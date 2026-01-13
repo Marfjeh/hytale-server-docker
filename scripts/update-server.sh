@@ -17,17 +17,19 @@ chmod +x hytale-downloader 2>/dev/null || true
 CURRENT_VERSION=""
 if [ -f ".server_version" ]; then
     CURRENT_VERSION=$(cat .server_version)
+    echo "Current version: $CURRENT_VERSION"
+    echo "Checking for updates..."
+    AVAILABLE_VERSION=$(./hytale-downloader -print-version 2>/dev/null || echo "unknown")
+    
+    if [ "$CURRENT_VERSION" = "$AVAILABLE_VERSION" ] && [ "$AVAILABLE_VERSION" != "unknown" ]; then
+        echo "Already up to date (Version: $CURRENT_VERSION)"
+        exit 0
+    fi
+    
+    echo "Update available: $CURRENT_VERSION -> $AVAILABLE_VERSION"
+else
+    echo "First time setup - downloading server files..."
 fi
-
-echo "Checking for updates..."
-AVAILABLE_VERSION=$(./hytale-downloader -print-version 2>/dev/null || echo "unknown")
-
-if [ -n "$CURRENT_VERSION" ] && [ "$CURRENT_VERSION" = "$AVAILABLE_VERSION" ]; then
-    echo "Already up to date (Version: $CURRENT_VERSION)"
-    exit 0
-fi
-
-echo "Update available: $CURRENT_VERSION -> $AVAILABLE_VERSION"
 
 echo "Downloading server files..."
 echo "Note: First run requires browser authentication"
@@ -53,7 +55,7 @@ fi
 echo "Extracting server files..."
 unzip -q -o game.zip
 
-NEW_VERSION="$AVAILABLE_VERSION"
+NEW_VERSION=$(./hytale-downloader -print-version 2>/dev/null || echo "unknown")
 
 if [ -n "$CURRENT_VERSION" ] && [ "$CURRENT_VERSION" != "$NEW_VERSION" ]; then
     echo "Version changed: $CURRENT_VERSION -> $NEW_VERSION"
