@@ -1,0 +1,14 @@
+services:
+  hytale:
+    image: ghcr.io/vngdv/hytale-server-docker:latest
+    container_name: hytale
+    build: .
+    ports:
+      - "5520:5520/udp"
+    volumes:
+      - ./data:/hytale-server
+    environment:
+      - BIND_ADDRESS=0.0.0.0:5520
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
