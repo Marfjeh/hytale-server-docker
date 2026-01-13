@@ -4,7 +4,7 @@ A simple Docker container for running a Hytale dedicated server. This automatica
 
 ## Quick Start with Docker
 
-Run this single command to start your server:
+Run your server with:
 
 ```bash
 docker run -d \
@@ -15,6 +15,8 @@ docker run -d \
 ```
 
 Your server will be running on port 5520. All server data is stored in the `./data` folder.
+
+**Note:** On first run, follow the browser authentication prompt that appears in the container logs.
 
 ## Using Docker Compose
 
@@ -36,11 +38,13 @@ services:
     restart: unless-stopped
 ```
 
-Then start it with:
+Start it with:
 
 ```bash
 docker compose up -d
 ```
+
+**Note:** On first run, check the logs with `docker compose logs -f` and follow the browser authentication prompt.
 
 ## Environment Variables
 

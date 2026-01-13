@@ -27,18 +27,15 @@ if [ -f ".server_version" ]; then
     fi
     
     echo "Update available: $CURRENT_VERSION -> $AVAILABLE_VERSION"
+    echo "Starting download of new version..."
 else
-    echo "First time setup - downloading server files..."
+    echo "First time setup - authentication required. Follow the browser prompt."
+    echo "After logging in via the browser, the download will start automatically."
 fi
 
-echo "Downloading server files..."
-echo "Note: First run requires browser authentication"
-echo ""
 
-./hytale-downloader -download-path game.zip > /tmp/downloader.log 2>&1
+./hytale-downloader -download-path game.zip
 DOWNLOAD_EXIT=$?
-
-cat /tmp/downloader.log
 
 if [ $DOWNLOAD_EXIT -ne 0 ]; then
     echo ""
