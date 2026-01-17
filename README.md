@@ -89,4 +89,4 @@ Your server will now be authenticated and players will be able to join!
 | `BACKUP_DIR` | Directory to store backups | `/hytale-server/backups` |
 | `BACKUP_FREQUENCY` | Backup interval in minutes | `30` |
 | `DISABLE_SENTRY` | Disable Sentry error reporting | `false` |
-| `PATCHLINE` | what hytale server release channel to use | `release` |
+| `PATCHLINE` | What hytale server release channel to use | `release` |
