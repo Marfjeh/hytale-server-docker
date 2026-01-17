@@ -12,7 +12,7 @@ docker run -d \
   -p 5520:5520/udp \
   -v ./data:/hytale-server \
   -it \
-  ghcr.io/vngdv/hytale-server-docker:latest
+  ghcr.io/marfjeh/hytale-server-docker:latest
 ```
 
 Your server will be running on port 5520. All server data is stored in the `./data` folder.
@@ -26,12 +26,13 @@ Create a `compose.yaml` file:
 ```yaml
 services:
   hytale:
-    image: ghcr.io/vngdv/hytale-server-docker:latest
+    image: ghcr.io/marfjeh/hytale-server-docker:latest
     container_name: hytale
     ports:
       - "5520:5520/udp"
     volumes:
       - ./data:/hytale-server
+      - /etc/machine-id:/etc/machine-id:ro
     environment:
       AUTO_UPDATE: true
       SERVER_NAME: My Hytale Server
@@ -88,3 +89,4 @@ Your server will now be authenticated and players will be able to join!
 | `BACKUP_DIR` | Directory to store backups | `/hytale-server/backups` |
 | `BACKUP_FREQUENCY` | Backup interval in minutes | `30` |
 | `DISABLE_SENTRY` | Disable Sentry error reporting | `false` |
+| `PATCHLINE` | what hytale server release channel to use | `release` |
